@@ -11,7 +11,7 @@ import SwiftUI
 struct APITestApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            POSTPodcasts()
         }
     }
 }
