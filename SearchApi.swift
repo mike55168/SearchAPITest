@@ -39,12 +39,16 @@ struct Results : Codable{
 struct PodcastTwo : Codable {
     var podcastId : String //頻道id
     var publisher : String //節目主持人
+    var image : String? //節目圖片，節目內也有，兩個都是 1400x1400
+    var thumbnail : String?
     var podcastTwoTitle : String //節目名稱
     
     enum CodingKeys:String,CodingKey {
         case podcastId = "id"
         case publisher  = "publisher_original"
+        case image = "image"
         case podcastTwoTitle = "title_original"
+        case thumbnail = "thumbnail"
     }
     
 }

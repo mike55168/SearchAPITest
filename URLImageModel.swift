@@ -4,6 +4,7 @@
 //
 //  Created by HookYang on 2021/8/14.
 //https://www.jianshu.com/p/58067f55ddab 參考
+//https://www.daimajiaoliu.com/daima/4797196a61003fc 網址中文解決問題
 
 import SwiftUI
 
@@ -16,10 +17,13 @@ class URLImageModel:ObservableObject {
             return
         }
         URLSession.shared.dataTask(with: imageURL){data,_,error in
+          
             
             guard let data = data,error == nil else{
+                
                 return
             }
+       
             
             DispatchQueue.main.async {
                 self.downloadedData = data
@@ -37,14 +41,16 @@ struct URLImage : View {
     let placeholder : String
     @ObservedObject var imgaeLoader = URLImageModel()
     init(url:String,placeholder:String = "placeholder") {
-        self.url = url
+        self.url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!//
         self.placeholder = placeholder
         self.imgaeLoader.downloadImage(url: self.url)
+        
     }
     
     var body: some View{
         
         if let data = self.imgaeLoader.downloadedData{
+          //  return Image(uiImage: UIImage(data: data)!)
             return Image(uiImage: UIImage(data: data)!)
                 .resizable()
                 .frame(width:80,height: 80)
